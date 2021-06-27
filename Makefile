@@ -35,7 +35,6 @@ USERNAME:= $(shell id -u -n)
 
 VER_NODE?=VER_NODE
 VER_ANTLR?=VER_ANTLR
-VER_PHP?=VER_PHP
 
 PROMPT_START= @echo "$(GREEN)Installing $(1)...$(RESET)"
 PROMPT_END= @echo "$(GREEN)End installing $(1)$(RESET).\n"
