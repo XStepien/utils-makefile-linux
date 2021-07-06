@@ -35,6 +35,10 @@ USERNAME:= $(shell id -u -n)
 
 VER_NODE?=VER_NODE
 VER_ANTLR?=VER_ANTLR
+VER_PHP?=VER_PHP
+
+EXEC_PHP = docker run -i -u $(shell id -u):$(shell id -g) --rm --net=host -v $(shell pwd):/var/www myprod/php:$(VER_PHP)-cli
+COMPOSER = $(EXEC_PHP) composer
 
 PROMPT_START= @echo "$(GREEN)Installing $(1)...$(RESET)"
 PROMPT_END= @echo "$(GREEN)End installing $(1)$(RESET).\n"
@@ -115,6 +119,9 @@ antlr: java ## install antlr
 	sed -i '/^export ZSH=.*/a export CLASSPATH=".:/usr/local/lib/antlr-$(VER_ANTLR)-complete.jar:$$CLASSPATH"' ~/.zshrc
 	$(/bin/zsh source  ~/.zshrc)
 	$(call PROMPT_END,$@)
+
+composer:
+	$(COMPOSER) $(ARGS)
 
 install-step-one: git docker zsh ## Full install step 1, need reboot
 
